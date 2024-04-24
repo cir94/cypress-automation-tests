@@ -3,13 +3,18 @@
   "version": "1.0.0",
   "description": "Repo comprised of automation tests written for Cypress",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "lint:check": "eslint . && prettier --check.",
+    "prettier:write": "prettier . --write",
+    "prepare": "husky"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "cypress": "^13.8.0",
+    "eslint": "^9.1.1",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5"
