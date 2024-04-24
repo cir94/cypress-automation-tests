@@ -1,0 +1,7 @@
+# Ignoring .husky due to no parser working with it
+
+/.husky
+
+# Ignoring .prettierignore itself
+
+.prettierignore
