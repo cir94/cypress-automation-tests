@@ -18,6 +18,7 @@ The packages used in this project are:
 
 - cypress
 - eslint
+- eslint-plugin-cypress
 - prettier
 - husky
 - lint-staged
