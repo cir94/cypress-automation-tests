@@ -12,13 +12,14 @@ describe('Kitchen Sink - Querying', () => {
   });
 
   it('should find elements using both get and within and write in each box', function () {
-    const name = 'Test';
+    // Storing name, email and password for test to reuse them later for assertion
+    const testName = 'Test';
     const testEmail = 'Testing@email.com';
     const testPassword = '123passtest*';
 
     cy.get('#inputName')
       .should('have.attr', 'placeholder', 'Name')
-      .type(`${name}`);
+      .type(`${testName}`);
     cy.get('.query-form').within(() => {
       cy.get('input:first')
         .should('have.attr', 'placeholder', 'Email')
@@ -27,5 +28,10 @@ describe('Kitchen Sink - Querying', () => {
         .should('have.attr', 'placeholder', 'Password')
         .type(`${testPassword}`);
     });
+
+    // Asserting that the correct information was typed into the input fields using the variables from above
+    cy.get('#inputName').should('have.value', testName);
+    cy.get('#inputEmail').should('have.value', testEmail);
+    cy.get('#inputPassword').should('have.value', testPassword);
   });
 });
