@@ -10,4 +10,22 @@ describe('Kitchen Sink - Querying', () => {
   it('should find elements by their contents via cy.contains()', function () {
     cy.get('.query-list').contains('apples').should('have.class', 'first');
   });
+
+  it('should find elements using both get and within and write in each box', function () {
+    const name = 'Test';
+    const testEmail = 'Testing@email.com';
+    const testPassword = '123passtest*';
+
+    cy.get('#inputName')
+      .should('have.attr', 'placeholder', 'Name')
+      .type(`${name}`);
+    cy.get('.query-form').within(() => {
+      cy.get('input:first')
+        .should('have.attr', 'placeholder', 'Email')
+        .type(`${testEmail}`);
+      cy.get('input:last')
+        .should('have.attr', 'placeholder', 'Password')
+        .type(`${testPassword}`);
+    });
+  });
 });
