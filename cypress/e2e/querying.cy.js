@@ -2,6 +2,7 @@ describe('Kitchen Sink - Querying', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/commands/querying');
   });
+
   it('should query the button and div via cy.get() command', function () {
     cy.get('#query-btn').should('contain', 'Button');
     cy.get('[data-test-id="test-example"]').should('have.class', 'example');
@@ -33,5 +34,11 @@ describe('Kitchen Sink - Querying', () => {
     cy.get('#inputName').should('have.value', testName);
     cy.get('#inputEmail').should('have.value', testEmail);
     cy.get('#inputPassword').should('have.value', testPassword);
+  });
+
+  it('should use cy.root() to find the root of the specified DOM element', function () {
+    cy.get('.query-ul').within(() => {
+      cy.root().should('have.class', 'query-ul');
+    });
   });
 });
