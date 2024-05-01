@@ -7,6 +7,13 @@ describe('Demoblaze Site - Testing Homepage', () => {
     cy.get('#tbodyid').children().should('have.length', 9);
   });
 
+  it('should have a navbar at the top', function () {
+    cy.get('.navbar-nav li')
+      .should('have.length', 8)
+      .last()
+      .contains('Sign up');
+  });
+
   it('should have 4 links in the categories section', function () {
     cy.get('.list-group')
       .children()
