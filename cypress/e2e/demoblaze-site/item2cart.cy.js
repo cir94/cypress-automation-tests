@@ -1,14 +1,16 @@
-describe('Demoblaze - Adding item to cart', function () {
+describe('Demoblaze - Adding item to cart and purchasing', function () {
   beforeEach(() => {
     cy.visit(`https://www.demoblaze.com/index.html#`);
   });
 
-  it('should click on the Nexus 6 item on the homepage and add it to the cart', function () {
+  it('should click on the Nexus 6 item on the homepage, add it to the cart, and confirm it is there before purchasing', function () {
     cy.contains('Nexus 6').click();
     cy.get('.name').should('have.text', 'Nexus 6');
     cy.contains('Add to cart').should('be.visible').click();
     cy.on('window:alert', (text) => {
       expect(text).to.eq('Product added');
     });
+    cy.get('#cartur').should('have.text', 'Cart').click();
+    cy.get('#tbodyid').children().contains('Nexus 6');
   });
 });
