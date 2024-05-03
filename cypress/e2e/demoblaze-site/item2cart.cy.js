@@ -34,5 +34,10 @@ describe('Demoblaze - Adding item to cart and purchasing', function () {
     cy.get('input#year').type(`${custcardYear}`);
 
     // Clicking Purchase button and asserting information entered is correct
+    cy.get('button[onClick*="purchaseOrder()"')
+      .should('have.text', 'Purchase')
+      .click();
+    cy.get('.lead').should('contain', `${custName}`);
+    cy.get('.lead').should('contain', `${custcardNum}`);
   });
 });
