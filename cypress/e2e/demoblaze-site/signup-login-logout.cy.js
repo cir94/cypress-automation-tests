@@ -15,7 +15,25 @@ describe('Demoblaze - Signing Up', function () {
     cy.wrap(password).as('password');
   });
 
-  it('should successfully create an account', function () {
+  it('should successfully create an account', async function () {
     cy.visit('https://www.demoblaze.com/index.html#');
+    cy.get('#signin2').should('have.text', 'Sign up').click();
+
+    // The two cy.get calls here type in the username and password created in the before hook and assert that what's been typed in is the same as the variables.
+    cy.get('input#sign-username.form-control')
+      .clear()
+      .click()
+      .type(await this.username, { delay: 0 })
+      .should('have.value', this.username);
+    cy.get('input#sign-password.form-control')
+      .clear()
+      .click()
+      .type(await this.password, { delay: 0 })
+      .should('have.value', this.password);
+
+    cy.get(`button[onclick*="register()"]`)
+      .should('contain', 'Sign up')
+      .click();
+    cy.get('#signInModal').should('be.hidden');
   });
 });
