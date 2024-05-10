@@ -4,19 +4,18 @@ import {
 } from '../demoblaze-site/user-pass-randomizer.js';
 
 describe('Demoblaze - Signing Up', function () {
-  // Rather than using beforeAll like most other spec files in this repo do, this spec file is using a normal before call to ensure that each test has the same username and password generated so that it can properly log in with the same credentials in later steps, rather than using beforeALl which would generate a different username and password for each one.
-
-  // As such, each test will instead call cy.visit on its own with the proper testing site URL
-
+  // To ensure the same username and password are available between specs, a before hook is being used to hold the variables
   before(() => {
     let username = userRandomizer();
     let password = passRandomizer();
     cy.wrap(username).as('username');
     cy.wrap(password).as('password');
   });
+  beforeEach(() => {
+    cy.visit('https://www.demoblaze.com/index.html#');
+  });
 
   it('should successfully create an account', function () {
-    cy.visit('https://www.demoblaze.com/index.html#');
     cy.get('#signin2').should('have.text', 'Sign up').click();
 
     // The two cy.get calls here type in the username and password created in the before hook and assert that what's been typed in is the same as the variables.
@@ -40,8 +39,8 @@ describe('Demoblaze - Signing Up', function () {
     });
   });
 
-  it('should be able to login with created account', function () {
-    cy.visit('https://www.demoblaze.com/index.html#');
+  it('should be able to login with created account, then logout', function () {
+    // Logging in with created account
     cy.get(`a[data-target="#logInModal"]`).should('contain', 'Log in').click();
     cy.get('input#loginusername.form-control')
       .clear()
@@ -58,5 +57,14 @@ describe('Demoblaze - Signing Up', function () {
     cy.get(`a[onclick*="logOut()"]`)
       .should('be.visible')
       .should('have.text', 'Log out');
+
+    // Logging out of created account
+    cy.get(`a[onclick*="logOut()"]`).click();
+    cy.get(`a#nameofuser`).should('be.hidden');
+    cy.get(`a[onclick*="logOut()"]`).should('be.hidden');
+    cy.get('a[data-target="#logInModal"]')
+      .should('be.visible')
+      .should('have.text', 'Log in');
+    cy.get('#signin2').should('be.visible').should('have.text', 'Sign up');
   });
 });
