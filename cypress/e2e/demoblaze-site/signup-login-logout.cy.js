@@ -15,7 +15,7 @@ describe('Demoblaze - Signing Up', function () {
     cy.wrap(password).as('password');
   });
 
-  it('should successfully create an account', async function () {
+  it('should successfully create an account', function () {
     cy.visit('https://www.demoblaze.com/index.html#');
     cy.get('#signin2').should('have.text', 'Sign up').click();
 
@@ -23,17 +23,40 @@ describe('Demoblaze - Signing Up', function () {
     cy.get('input#sign-username.form-control')
       .clear()
       .click()
-      .type(await this.username, { delay: 0 })
+      .type(this.username, { delay: 0 })
       .should('have.value', this.username);
     cy.get('input#sign-password.form-control')
       .clear()
       .click()
-      .type(await this.password, { delay: 0 })
+      .type(this.password, { delay: 0 })
       .should('have.value', this.password);
 
     cy.get(`button[onclick*="register()"]`)
       .should('contain', 'Sign up')
       .click();
     cy.get('#signInModal').should('be.hidden');
+    cy.on('window:alert', (text) => {
+      expect(text).to.eq('Sign up successful.');
+    });
+  });
+
+  it('should be able to login with created account', function () {
+    cy.visit('https://www.demoblaze.com/index.html#');
+    cy.get(`a[data-target="#logInModal"]`).should('contain', 'Log in').click();
+    cy.get('input#loginusername.form-control')
+      .clear()
+      .click()
+      .type(this.username, { delay: 0 })
+      .should('have.value', this.username);
+    cy.get('input#loginpassword.form-control')
+      .clear()
+      .click()
+      .type(this.password, { delay: 0 })
+      .should('have.value', this.password);
+    cy.get('button[onclick*="logIn()"]').should('have.text', 'Log in').click();
+    cy.get(`a#nameofuser`).should('have.text', `Welcome ${this.username}`);
+    cy.get(`a[onclick*="logOut()"]`)
+      .should('be.visible')
+      .should('have.text', 'Log out');
   });
 });
