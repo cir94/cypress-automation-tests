@@ -2,6 +2,7 @@
 
 /.husky
 
-# Ignoring .prettierignore itself
+# Ignoring other files that prettier cannot format
 
 .prettierignore
+.dockerignore
