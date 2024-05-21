@@ -136,3 +136,7 @@ allure-results/
 allure-report/
 wdio-allure-results/
 cucumber-allure-results/
+
+# cypress screenshots
+
+screenshots/

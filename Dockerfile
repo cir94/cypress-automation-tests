@@ -1,8 +1,6 @@
-FROM node:22-alpine
+FROM cypress/base:latest
 
 WORKDIR /usr/src/app
-
-ENV CI="true"
 
 RUN apt-get update
 

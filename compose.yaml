@@ -1,0 +1,7 @@
+name: cypress
+
+services:
+  cypress:
+    build:
+      context: .
+      dockerfile: Dockerfile
