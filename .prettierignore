@@ -6,3 +6,4 @@
 
 .prettierignore
 .dockerignore
+Dockerfile
