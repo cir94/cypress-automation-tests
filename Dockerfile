@@ -12,4 +12,4 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 
 COPY . .
 
-CMD npm run cy:headless
+CMD npm run cy:dockerheadless

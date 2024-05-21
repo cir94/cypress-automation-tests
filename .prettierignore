@@ -4,6 +4,7 @@
 
 # Ignoring other files that prettier cannot format
 
+.gitignore
 .prettierignore
 .dockerignore
 Dockerfile
