@@ -1,7 +1,7 @@
 name: cypress
 
 services:
-  cypress:
+  e2e:
     build:
       context: .
       dockerfile: Dockerfile
