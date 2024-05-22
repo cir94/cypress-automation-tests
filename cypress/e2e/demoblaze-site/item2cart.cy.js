@@ -27,12 +27,20 @@ describe('Demoblaze - Adding item to cart and purchasing', function () {
     // Clicking on the Place Order button and entering information
     cy.get('.btn-success').should('contain', 'Place Order').click();
     // A delay is used in writing the custName variable to eliminate flakiness in tests due to type sometimes not writing the full string
-    cy.get('input#name').type(`${custName}`, { delay: 0 });
-    cy.get('input#country').type(`${custCountry}`);
-    cy.get('input#city').type(`${custCity}`);
-    cy.get('input#card').type(`${custcardNum}`);
-    cy.get('input#month').type(`${custcardMonth}`);
-    cy.get('input#year').type(`${custcardYear}`);
+    cy.get('input#name').type(`${custName}`).should('have.value', custName);
+    cy.get('input#country')
+      .type(`${custCountry}`)
+      .should('have.value', custCountry);
+    cy.get('input#city').type(`${custCity}`).should('have.value', custCity);
+    cy.get('input#card')
+      .type(`${custcardNum}`)
+      .should('have.value', custcardNum);
+    cy.get('input#month')
+      .type(`${custcardMonth}`)
+      .should('have.value', custcardMonth);
+    cy.get('input#year')
+      .type(`${custcardYear}`)
+      .should('have.value', custcardYear);
 
     // Clicking Purchase button and asserting information entered is correct
     cy.get('button[onClick*="purchaseOrder()"')
