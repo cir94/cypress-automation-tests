@@ -1,3 +1,5 @@
+# To run this Compose file, first run `docker compose up --build`. If you would like to run this image again after building, run `docker compose up`
+
 name: cypress
 
 services:

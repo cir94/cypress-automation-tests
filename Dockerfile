@@ -1,3 +1,6 @@
+# To run this Docker file, run `docker compose up --build`. If you would like to run this image again after building, run `docker compose up`
+
+
 FROM cypress/base:latest
 
 WORKDIR /usr/src/app

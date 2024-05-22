@@ -26,6 +26,7 @@ describe('Demoblaze - Adding item to cart and purchasing', function () {
 
     // Clicking on the Place Order button and entering information
     cy.get('.btn-success').should('contain', 'Place Order').click();
+    // A delay is used in writing the custName variable to eliminate flakiness in tests due to type sometimes not writing the full string
     cy.get('input#name').type(`${custName}`, { delay: 0 });
     cy.get('input#country').type(`${custCountry}`);
     cy.get('input#city').type(`${custCity}`);
