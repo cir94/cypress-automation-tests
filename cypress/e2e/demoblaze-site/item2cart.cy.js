@@ -1,3 +1,5 @@
+import { recurse } from 'cypress-recurse';
+
 describe('Demoblaze - Adding item to cart and purchasing', function () {
   it('should click on the Nexus 6 item on the homepage, add it to the cart, and confirm it is there before purchasing', function () {
     cy.visit(`https://www.demoblaze.com/index.html#`);
@@ -26,8 +28,11 @@ describe('Demoblaze - Adding item to cart and purchasing', function () {
 
     // Clicking on the Place Order button and entering information
     cy.get('.btn-success').should('contain', 'Place Order').click();
-    // A delay is used in writing the custName variable to eliminate flakiness in tests due to type sometimes not writing the full string
-    cy.get('input#name').type(`${custName}`).should('have.value', custName);
+    recurse(
+      () => cy.get('input#name').clear().type(custName),
+      ($name) => $name.val() === custName
+    );
+    // cy.get('input#name').type(`${custName}`).should('have.value', custName);
     cy.get('input#country')
       .type(`${custCountry}`)
       .should('have.value', custCountry);
