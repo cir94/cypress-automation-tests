@@ -28,6 +28,8 @@ describe('Demoblaze - Adding item to cart and purchasing', function () {
 
     // Clicking on the Place Order button and entering information
     cy.get('.btn-success').should('contain', 'Place Order').click();
+
+    // The recursive function below is used to prevent flakiness from typing in a long string with .type(), specifically in a Docker container. This doubles as an assertion
     recurse(
       () => cy.get('input#name').clear().type(custName),
       ($name) => $name.val() === custName,
