@@ -30,28 +30,25 @@ describe('Demoblaze - Adding item to cart and purchasing', function () {
     cy.get('.btn-success').should('contain', 'Place Order').click();
     recurse(
       () => cy.get('input#name').clear().type(custName),
-      ($name) => $name.val() === custName
+      ($name) => $name.val() === custName,
+      {
+        delay: 0,
+      }
     );
     // cy.get('input#name').type(`${custName}`).should('have.value', custName);
-    cy.get('input#country')
-      .type(`${custCountry}`)
-      .should('have.value', custCountry);
-    cy.get('input#city').type(`${custCity}`).should('have.value', custCity);
-    cy.get('input#card')
-      .type(`${custcardNum}`)
-      .should('have.value', custcardNum);
+    cy.get('input#country').type(custCountry).should('have.value', custCountry);
+    cy.get('input#city').type(custCity).should('have.value', custCity);
+    cy.get('input#card').type(custcardNum).should('have.value', custcardNum);
     cy.get('input#month')
-      .type(`${custcardMonth}`)
+      .type(custcardMonth)
       .should('have.value', custcardMonth);
-    cy.get('input#year')
-      .type(`${custcardYear}`)
-      .should('have.value', custcardYear);
+    cy.get('input#year').type(custcardYear).should('have.value', custcardYear);
 
     // Clicking Purchase button and asserting information entered is correct
     cy.get('button[onClick*="purchaseOrder()"')
       .should('have.text', 'Purchase')
       .click();
-    cy.get('.lead').should('contain', `${custName}`);
-    cy.get('.lead').should('contain', `${custcardNum}`);
+    cy.get('.lead').should('contain', custName);
+    cy.get('.lead').should('contain', custcardNum);
   });
 });
