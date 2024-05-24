@@ -12,7 +12,7 @@ There are currently only E2E tests in the repo.
 
 Both ESLint and Prettier are used for linting and formatting code to follow a uniform standard. Husky and lint-staged are used as well in this repo, with Husky running pre-commit hooks, using lint-staged to run the `prettier --write` script on all staged files to ensure any code being commited for a push is formatted properly.
 
-There's both a `Dockerfile` and a `compose.yaml` file available to use in Docker if one chooses to use that to run the tests instead. Running it through Docker will guarantee that the tests run clean. Please note that the tests are only ran in Headless mode through Docker.
+There's both a `Dockerfile` and a `compose.yaml` file available to use in Docker if one chooses to use that to run the tests instead. Running it through Docker will guarantee that the tests run clean. Please note that the tests are only ran in Headless mode through Docker, and not with the GUI application itself.
 
 # To setup project for use on system
 

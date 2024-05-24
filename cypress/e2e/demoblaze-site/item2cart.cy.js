@@ -37,7 +37,10 @@ describe('Demoblaze - Adding item to cart and purchasing', function () {
         delay: 0,
       }
     );
+
+    // Below is the original .type() used which caused flakiness in Headless Docker
     // cy.get('input#name').type(`${custName}`).should('have.value', custName);
+
     cy.get('input#country').type(custCountry).should('have.value', custCountry);
     cy.get('input#city').type(custCity).should('have.value', custCity);
     cy.get('input#card').type(custcardNum).should('have.value', custcardNum);
