@@ -37,6 +37,7 @@ To run the tests in a Docker container, run the following command in your termin
 The packages used in this project are:
 
 - cypress
+- cypress-recurse
 - eslint
 - eslint-plugin-cypress
 - prettier
