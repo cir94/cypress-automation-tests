@@ -6,6 +6,9 @@ context('Test API', () => {
       expect(response.body.data).length.to.be.greaterThan(1);
       expect(response.body.data[0].email).to.equal('michael.lawson@reqres.in');
       cy.writeFile('cypress/writetest/users.json', response.body.data);
+      cy.readFile('cypress/writetest/users.json')
+        .its('[2].email')
+        .should('eq', 'tobias.funke@reqres.in');
     });
   });
 });
