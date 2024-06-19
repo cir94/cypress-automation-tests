@@ -137,6 +137,7 @@ allure-report/
 wdio-allure-results/
 cucumber-allure-results/
 
-# cypress screenshots
+# cypress folders
 
+cypress/writetest
 screenshots/
